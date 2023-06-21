@@ -1,0 +1,154 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>분실물 등록</title>
+    <style>
+        .ds-header{ position: fixed; top: 0; width: 100%; z-index: 5; background-color: #FFF; padding: 70px 0;transition-delay: 0s;transition-duration: 0.4s;transition-property: all;transition-timing-function: ease; }
+        .ds-header.ds-fixed-header{ padding:20px 0;box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.25); }
+        .ds-header-inner{ display: flex; justify-content: space-between; align-items: center; }
+        .ds-header,.ds-header.ds-fixed-header{ padding: 15px 0; }
+        .ds-logo{ text-transform: uppercase; font-size: 18px; letter-spacing: 3px; color: #000; display: flex; align-items: center; text-decoration-line: none;  }
+        .ds-logo span{ display:flex; align-items: center; justify-content: center; width: 40px; height: 40px; background-color: #000; border-radius: 4px; color: #FFF; font-size: 22px; font-weight: 600; text-align: center; margin-right: 12px; }
+        .ds-logo:hover{ color: #000; }
+
+        .ds-social{ list-style: none; display: flex; align-items: center; flex-wrap: wrap; }
+        .ds-social li{ margin-left: 12px; }
+        .ds-social li:first-child{ margin-left: 0; }
+        .ds-social li a{ border-radius: 100%; color: #FFF; width: 24px; height: 24px; background-color: #F26464; display:flex; justify-content: center; align-items: center; text-align: center; font-size: 16px;}
+        .ds-social li a:hover{ background-color: #000; color: #FFF;}
+        header{display: block;}
+        body {
+            font-family: Arial, sans-serif;
+            
+            background-size: cover;
+            
+
+        }
+        h1 {
+            color: #333;
+        }
+        .container1{
+                width: 100%;
+                padding-left : 85px;
+            
+                padding-top : 55px;
+                
+               
+                
+        }
+        .container {
+            max-width: 400px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f5f5f5;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            margin-top: 150px;
+            
+        }
+        .form-group {
+            margin-bottom: 20px;
+        }
+        .form-group label {
+            display: block;
+            font-weight: bold;
+        }
+        .form-group input {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        .btn {
+            display: inline-block;
+            
+            color: #fff;
+            
+            text-decoration: none;
+            border-radius: 4px;
+        }
+        .reg {
+            display: inline-block;
+            background-color: #F26464;
+            color: #fff;
+            padding: 10px 20px;
+            text-decoration: none;
+            border-radius: 4px;
+            width: 100%;
+            border: none;
+
+        }
+       
+    </style>
+</head>
+<body>
+    <header class="ds-header" id="site-header">
+    <div class="container1">
+        <div class="ds-header-inner">
+          <!-- logo -->
+          <a href="index.html" class="ds-logo">
+            <span>L</span>분실물 찾기 웹 사이트
+          </a>
+          <!-- logo -->
+          <!-- social -->
+          <ul class="ds-social">
+            
+          </ul>
+          <!-- social -->
+        </div>
+    </div>
+</header>
+    
+   
+    <div class="container">
+        <a class="btn" href="index.html"><img src="image/return.png" width="50" height="50"></a>
+        <h1>분실물 등록</h1>
+        <p>분실한 물건을 아래 폼을 통해 등록할 수 있습니다.</p>
+        
+        <form id="registerForm">
+            <label for="item_name">분실물 이름:</label>
+            <input type="text" id="item_name" name="item_name" required><br><br>
+            
+            <label for="location">분실 장소:</label>
+            <input type="text" id="location" name="location" required><br><br>
+            
+            <label for="date">분실 일자:</label>
+            <input type="date" id="date" name="date" required><br><br>
+            
+            <input class="reg" type="submit" value="등록">
+        </form>
+        
+        
+        
+    </div>
+
+
+    <script>
+        // 분실물 등록 폼 제출 시 실행되는 함수
+        document.getElementById("registerForm").addEventListener("submit", function(event) {
+            event.preventDefault(); // 기본 폼 제출 동작 중단
+
+            // 등록된 분실물 정보 가져오기
+            var itemName = document.getElementById("item_name").value;
+            var location = document.getElementById("location").value;
+            var date = document.getElementById("date").value;
+
+            // 로컬 스토리지에 분실물 등록 정보 저장
+            var lostItems = JSON.parse(localStorage.getItem("lostItems")) || [];
+            lostItems.push({
+                itemName: itemName,
+                location: location,
+                date: date
+            });
+            localStorage.setItem("lostItems", JSON.stringify(lostItems));
+
+            // 분실물 등록 완료 메시지 출력
+            alert("분실물이 등록되었습니다.");
+
+            // 분실물 등록 페이지 리다이렉트
+            location.href = "lost_items.html";
+        });
+    </script>
+</body>
+</html>
